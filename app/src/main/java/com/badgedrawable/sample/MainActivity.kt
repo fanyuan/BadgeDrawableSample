@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
                 BadgeDrawable.create(this@MainActivity).apply {
                     badgeGravity = BadgeDrawable.TOP_START
                     number = 6
-                    backgroundColor = ContextCompat.getColor(this@MainActivity,R.color.red)
+                    backgroundColor = ContextCompat.getColor(this@MainActivity,R.color.yellow)
+                    badgeTextColor = ContextCompat.getColor(this@MainActivity,R.color.black)
                     // MaterialButton本身有间距，不设置为0dp的话，可以设置badge的偏移量
                     verticalOffset = 15
                     horizontalOffset = 10
