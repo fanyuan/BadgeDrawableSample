@@ -36,6 +36,12 @@
             android:layout_marginTop="30dp"
             android:text="小红点示例"
             android:textAllCaps="false"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button小红点示例" />
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

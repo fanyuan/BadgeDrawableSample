@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import com.badgedrawable.sample.databinding.ActivityMainBinding
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,9 +20,11 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this,R.layout.activity_main)
 
         initTextview(binding.tvBadge)
+        initButton(binding.mbBadge)
     }
-
-
+    fun tabLayout(view: View) {
+        startActivity(Intent(this,TabLayoutActivity::class.java))
+    }
     private fun initTextview(tvBadge: TextView) {
         tvBadge.viewTreeObserver.addOnGlobalLayoutListener (object :ViewTreeObserver.OnGlobalLayoutListener{
             @SuppressLint("UnsafeExperimentalUsageError")
@@ -38,8 +41,22 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
-    fun tabLayout(view: View) {
-        startActivity(Intent(this,TabLayoutActivity::class.java))
+    @SuppressLint("UnsafeExperimentalUsageError")
+    private fun initButton(mbBadge: MaterialButton) {
+        mbBadge.viewTreeObserver.addOnGlobalLayoutListener (object : ViewTreeObserver.OnGlobalLayoutListener{
+            override fun onGlobalLayout() {
+                BadgeDrawable.create(this@MainActivity).apply {
+                    badgeGravity = BadgeDrawable.TOP_START
+                    number = 6
+                    backgroundColor = ContextCompat.getColor(this@MainActivity,R.color.red)
+                    // MaterialButton本身有间距，不设置为0dp的话，可以设置badge的偏移量
+                    verticalOffset = 15
+                    horizontalOffset = 10
+                    BadgeUtils.attachBadgeDrawable(this,mbBadge)
+                }
+                mbBadge.viewTreeObserver.removeOnGlobalLayoutListener(this);
+            }
+        })
     }
+
 }
